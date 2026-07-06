@@ -1,0 +1,21 @@
+---
+const base = import.meta.env.BASE_URL;
+---
+<div id="search" class="search-box"></div>
+
+<link rel="stylesheet" href={`${base}pagefind/pagefind-ui.css`} />
+<script is:inline define:vars={{ base }}>
+  const script = document.createElement('script');
+  script.src = `${base}pagefind/pagefind-ui.js`;
+  script.onload = () => {
+    // eslint-disable-next-line no-undef
+    new PagefindUI({ element: '#search', showSubResults: true, showImages: false, bundlePath: `${base}pagefind/` });
+  };
+  document.head.appendChild(script);
+</script>
+
+<style>
+  .search-box {
+    min-width: 220px;
+  }
+</style>

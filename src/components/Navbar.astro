@@ -1,5 +1,6 @@
 ---
 import { withBase } from '../utils/url';
+import SearchBox from './SearchBox.astro';
 
 const links = [
   { href: '/', label: 'Inicio' },
@@ -17,6 +18,7 @@ const links = [
       <a href={withBase(link.href)}>{link.label}</a>
     ))}
   </nav>
+  <SearchBox />
 </header>
 
 <style>
