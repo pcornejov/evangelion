@@ -1,0 +1,64 @@
+---
+interface Stat {
+  label: string;
+  value: string;
+}
+interface Props {
+  title?: string;
+  stats: Stat[];
+}
+const { title, stats } = Astro.props;
+---
+<div class="stat-block">
+  {title && <h3 class="stat-block-title">{title}</h3>}
+  <dl>
+    {stats.map((stat) => (
+      <div class="stat-row">
+        <dt>{stat.label}</dt>
+        <dd>{stat.value}</dd>
+      </div>
+    ))}
+  </dl>
+</div>
+
+<style>
+  .stat-block {
+    background: var(--color-bg-panel);
+    border: 1px solid var(--color-nerv-green);
+    border-radius: var(--radius-panel);
+    padding: var(--space-sm);
+  }
+
+  .stat-block-title {
+    margin: 0 0 var(--space-xs);
+    font-size: 0.9rem;
+    color: var(--color-nerv-green);
+  }
+
+  dl {
+    margin: 0;
+  }
+
+  .stat-row {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    padding: 0.35rem 0;
+    border-bottom: 1px dashed var(--color-border);
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+  }
+
+  .stat-row:last-child {
+    border-bottom: none;
+  }
+
+  dt {
+    color: var(--color-text-muted);
+  }
+
+  dd {
+    margin: 0;
+    text-align: right;
+  }
+</style>

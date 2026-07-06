@@ -1,0 +1,29 @@
+:root {
+  --color-bg: #0a0a0f;
+  --color-bg-panel: #14141c;
+  --color-bg-panel-alt: #1c1c26;
+  --color-border: #2a2a38;
+
+  --color-nerv-purple: #5b2a86;
+  --color-nerv-purple-bright: #8b5cf6;
+  --color-nerv-green: #00e5a0;
+  --color-alert-orange: #ff6b1a;
+  --color-alert-red: #ff2b2b;
+
+  --color-eva01: #7c3aed;
+  --color-eva00: #3b82f6;
+  --color-eva02: #dc2626;
+
+  --color-text: #e7e7ea;
+  --color-text-muted: #9ca3af;
+
+  --font-display: "Share Tech Mono", "JetBrains Mono", monospace;
+  --font-body: "Inter", "Noto Sans JP", sans-serif;
+
+  --radius-panel: 2px;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2.5rem;
+  --space-xl: 4rem;
+}

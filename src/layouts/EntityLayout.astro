@@ -1,0 +1,71 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import EntityGrid from '../components/EntityGrid.astro';
+import Card from '../components/Card.astro';
+
+interface RelatedItem {
+  href: string;
+  title: string;
+  subtitle?: string;
+  image?: string;
+}
+interface Crumb {
+  label: string;
+  href?: string;
+}
+interface Props {
+  title: string;
+  description?: string;
+  crumbs: Crumb[];
+  related?: RelatedItem[];
+}
+const { title, description, crumbs, related = [] } = Astro.props;
+---
+<BaseLayout title={`${title} — NERV Encyclopedia`} description={description}>
+  <main>
+    <Breadcrumbs crumbs={crumbs} />
+    <div class="entity-layout">
+      <aside>
+        <slot name="stats" />
+      </aside>
+      <article>
+        <h1>{title}</h1>
+        <slot />
+      </article>
+    </div>
+    {related.length > 0 && (
+      <section class="related">
+        <h2>Relacionados</h2>
+        <EntityGrid>
+          {related.map((item) => (
+            <Card href={item.href} title={item.title} subtitle={item.subtitle} image={item.image} />
+          ))}
+        </EntityGrid>
+      </section>
+    )}
+  </main>
+</BaseLayout>
+
+<style>
+  .entity-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: var(--space-lg);
+    align-items: start;
+  }
+
+  @media (max-width: 720px) {
+    .entity-layout {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  article :global(h2) {
+    margin-top: var(--space-lg);
+  }
+
+  .related {
+    margin-top: var(--space-xl);
+  }
+</style>

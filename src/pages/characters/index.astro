@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import EntityGrid from '../../components/EntityGrid.astro';
+import Card from '../../components/Card.astro';
+import { getCollection } from 'astro:content';
+
+const characters = await getCollection('characters');
+---
+<BaseLayout title="Personajes — NERV Encyclopedia">
+  <main>
+    <h1>Personajes</h1>
+    {characters.length === 0 ? (
+      <p>Sección en construcción. Próximamente.</p>
+    ) : (
+      <EntityGrid>
+        {characters.map((c) => (
+          <Card href={`/characters/${c.id}`} title={c.data.name} subtitle={c.data.summary} />
+        ))}
+      </EntityGrid>
+    )}
+  </main>
+</BaseLayout>

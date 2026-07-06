@@ -1,9 +1,38 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import EntityGrid from '../components/EntityGrid.astro';
+import Card from '../components/Card.astro';
+
+const categories = [
+  { href: '/characters/', title: 'Personajes', subtitle: 'Pilotos, personal de NERV y más.' },
+  { href: '/episodes/', title: 'Episodios', subtitle: 'Los 26 episodios + End of Evangelion.' },
+  { href: '/mechas/', title: 'Mechas', subtitle: 'Las Unidades Evangelion.' },
+  { href: '/angels/', title: 'Ángeles', subtitle: 'Los Ángeles y sus enfrentamientos con NERV.' },
+  { href: '/organizations/', title: 'Organizaciones', subtitle: 'NERV, SEELE y conceptos clave.' },
+];
 ---
 <BaseLayout title="NERV Encyclopedia">
   <main>
-    <h1>NERV Encyclopedia</h1>
-    <p>Enciclopedia de Neon Genesis Evangelion — en construcción.</p>
+    <section class="hero">
+      <h1>NERV Encyclopedia</h1>
+      <p>Enciclopedia de referencia sobre Neon Genesis Evangelion.</p>
+    </section>
+    <EntityGrid>
+      {categories.map((cat) => (
+        <Card href={cat.href} title={cat.title} subtitle={cat.subtitle} />
+      ))}
+    </EntityGrid>
   </main>
 </BaseLayout>
+
+<style>
+  .hero {
+    margin-bottom: var(--space-lg);
+    padding-bottom: var(--space-md);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .hero p {
+    color: var(--color-text-muted);
+  }
+</style>

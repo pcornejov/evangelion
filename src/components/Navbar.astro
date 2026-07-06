@@ -1,0 +1,66 @@
+---
+import { withBase } from '../utils/url';
+
+const links = [
+  { href: '/', label: 'Inicio' },
+  { href: '/characters/', label: 'Personajes' },
+  { href: '/episodes/', label: 'Episodios' },
+  { href: '/mechas/', label: 'Mechas' },
+  { href: '/angels/', label: 'Ángeles' },
+  { href: '/organizations/', label: 'Organizaciones' },
+];
+---
+<header class="navbar">
+  <a class="brand" href={withBase('/')}>NERV<span>ENCYCLOPEDIA</span></a>
+  <nav>
+    {links.map((link) => (
+      <a href={withBase(link.href)}>{link.label}</a>
+    ))}
+  </nav>
+</header>
+
+<style>
+  .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+    padding: var(--space-sm) var(--space-md);
+    background: var(--color-bg-panel);
+    border-bottom: 1px solid var(--color-nerv-green);
+    box-shadow: 0 1px 12px -4px var(--color-nerv-green);
+    flex-wrap: wrap;
+  }
+
+  .brand {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    color: var(--color-text);
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+  }
+
+  .brand span {
+    font-size: 0.6rem;
+    color: var(--color-nerv-green);
+    letter-spacing: 0.15em;
+  }
+
+  nav {
+    display: flex;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+  }
+
+  nav a {
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+  }
+
+  nav a:hover {
+    color: var(--color-nerv-green);
+    text-decoration: none;
+  }
+</style>
