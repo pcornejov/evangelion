@@ -10,6 +10,13 @@ firstAppearance: "Episodio 1: Angel Attack"
 status: "Vivo"
 image: "/images/characters/kozo-fuyutsuki.jpg"
 summary: "Subcomandante de NERV y mano derecha de Gendo Ikari, un antiguo profesor universitario de Yui Ikari cuya lealtad institucional oculta un conocimiento profundo de los orígenes secretos del proyecto Evangelion."
+relations:
+  - character: "gendo-ikari"
+    relationType: "Subordinado leal"
+    description: "Ejecuta sus decisiones como subcomandante de NERV pese a no compartir siempre sus métodos ni sus fines."
+  - character: "yui-ikari"
+    relationType: "Antigua alumna"
+    description: "Fue su profesor universitario años antes de que ella desapareciera dentro del EVA-01, y guarda un vínculo personal con su memoria."
 tags: ["nerv", "subcomandante", "oficial"]
 sources:
   - title: "Evangelion Wiki (Fandom)"

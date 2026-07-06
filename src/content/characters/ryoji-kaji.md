@@ -10,6 +10,13 @@ firstAppearance: "Episodio 8: Asuka Strikes!"
 status: "Muerto"
 image: "/images/characters/ryoji-kaji.jpg"
 summary: "Agente encubierto que trabaja oficialmente para NERV pero reporta en secreto a otras facciones, un hombre carismático y despreocupado en apariencia cuya doble lealtad termina costándole la vida."
+relations:
+  - character: "misato-katsuragi"
+    relationType: "Pareja intermitente"
+    description: "Retoma con ella una relación romántica intermitente iniciada en la universidad, marcada por la desconfianza que genera su doble juego."
+  - character: "asuka-langley"
+    relationType: "Figura adulta cercana"
+    description: "Le ofrece una calidez genuina ante los intentos de seducción de la joven piloto, sin corresponder a sus avances."
 tags: ["nerv", "espia", "seele"]
 sources:
   - title: "Evangelion Wiki (Fandom)"

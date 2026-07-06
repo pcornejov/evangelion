@@ -10,6 +10,13 @@ firstAppearance: "Episodio 8: Asuka Strikes!"
 status: "Vivo"
 image: "/images/characters/hikari-horaki.jpg"
 summary: "Delegada de la clase de Shinji en Tokio-3, una joven responsable y organizada que se convierte en la amiga más cercana de Asuka Langley pese a las notables diferencias de carácter entre ambas."
+relations:
+  - character: "asuka-langley"
+    relationType: "Amiga cercana"
+    description: "Es una de las pocas personas con las que Asuka baja la guardia y comparte confidencias genuinas."
+  - character: "toji-suzuhara"
+    relationType: "Interés mutuo"
+    description: "Mantiene con él una relación cambiante que insinúa una atracción incipiente entre ambos."
 tags: ["civil", "companera-clase", "tokio-3", "delegada"]
 sources:
   - title: "Evangelion Wiki (Fandom)"

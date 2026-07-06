@@ -10,6 +10,16 @@ firstAppearance: "Episodio 1: Angel Attack"
 status: "Muerto"
 image: "/images/characters/ritsuko-akagi.jpg"
 summary: "Jefa científica de NERV y responsable técnica del desarrollo de los EVA, una mujer racional y disciplinada cuya lealtad a Gendo Ikari, alimentada por una relación sentimental con él, termina por consumir su propia integridad profesional y personal."
+relations:
+  - character: "gendo-ikari"
+    relationType: "Pareja"
+    description: "Se involucra sentimentalmente con él pese a que nunca le ofrece un compromiso genuino, hasta que él la asesina."
+  - character: "misato-katsuragi"
+    relationType: "Amiga"
+    description: "Su amistad cercana desde la universidad se ve puesta a prueba conforme ambas descubren los secretos que oculta NERV."
+  - character: "naoko-akagi"
+    relationType: "Madre"
+    description: "Hereda de ella tanto su puesto técnico en NERV como, de forma involuntaria, el mismo patrón de vínculo destructivo con Gendo Ikari."
 tags: ["nerv", "cientifica", "magi"]
 sources:
   - title: "Evangelion Wiki (Fandom)"

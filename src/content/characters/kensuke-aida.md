@@ -10,6 +10,13 @@ firstAppearance: "Episodio 2: The Beast"
 status: "Vivo"
 image: "/images/characters/kensuke-aida.jpg"
 summary: "Compañero de clase de Shinji y fanático de la tecnología militar, un adolescente obsesionado con fotografiar y documentar a los Evangelion que sueña con pilotear uno, sin sospechar del todo el precio real de la guerra que admira desde fuera."
+relations:
+  - character: "shinji-ikari"
+    relationType: "Amigo"
+    description: "Comparte con él una amistad escolar que le ofrece momentos de normalidad adolescente en medio de la guerra contra los Ángeles."
+  - character: "toji-suzuhara"
+    relationType: "Amigo"
+    description: "Forma junto a él y Shinji un pequeño grupo de amigos, y reacciona con preocupación cuando Toji se convierte en piloto del EVA-03."
 tags: ["civil", "companero-clase", "tokio-3"]
 sources:
   - title: "Evangelion Wiki (Fandom)"

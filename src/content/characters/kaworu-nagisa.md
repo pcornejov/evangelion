@@ -11,6 +11,10 @@ firstAppearance: "Episodio 24: The Final Messenger"
 status: "Muerto"
 image: "/images/characters/kaworu-nagisa.jpg"
 summary: "El Quinto Niño, un joven de aparición tardía y trato inusualmente afectuoso con Shinji, que resulta ser en realidad la última encarnación del ángel Tabris, enviado a NERV para intentar acceder a Lilith."
+relations:
+  - character: "shinji-ikari"
+    relationType: "Vínculo afectivo"
+    description: "Le ofrece, de forma directa y sin condiciones, la aceptación que Shinji había buscado durante toda la serie, justo antes de pedirle que lo destruya."
 tags: ["piloto-eva", "quinto-nino", "angel", "nerv"]
 sources:
   - title: "Evangelion Wiki (Fandom)"

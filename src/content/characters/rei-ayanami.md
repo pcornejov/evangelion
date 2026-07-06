@@ -11,6 +11,16 @@ firstAppearance: "Episodio 1: Angel Attack"
 status: "Muerto"
 image: "/images/characters/rei-ayanami.jpg"
 summary: "La Primera Niña, piloto del EVA-00, una joven de comportamiento casi anestésico cuyo origen —un clon creado a partir de material genético de Yui Ikari, con fragmentos del alma del ángel Lilith— es una de las revelaciones centrales de la trama."
+relations:
+  - character: "shinji-ikari"
+    relationType: "Compañero piloto"
+    description: "Construye con él una cercanía genuina hecha de pequeños gestos, algo inédito en su vida hasta entonces."
+  - character: "gendo-ikari"
+    relationType: "Tutor / superior"
+    description: "La trata con un afecto distante que nunca ofrece a su propio hijo, viéndola en parte como un sustituto simbólico de Yui."
+  - character: "yui-ikari"
+    relationType: "Origen genético"
+    description: "Fue clonada a partir del material genético de Yui Ikari, lo que explica el trato especial que Gendo le dedica."
 tags: ["piloto-eva", "primer-nino", "nerv", "eva-00", "clon"]
 sources:
   - title: "Evangelion Wiki (Fandom)"

@@ -11,6 +11,16 @@ firstAppearance: "Episodio 3: A Transfer"
 status: "Vivo"
 image: "/images/characters/toji-suzuhara.jpg"
 summary: "Compañero de clase de Shinji que inicialmente lo culpa por las heridas de su hermana pequeña durante un ataque de un Ángel, y que termina convirtiéndose, casi contra su voluntad, en el piloto de emergencia del EVA-03, con consecuencias devastadoras."
+relations:
+  - character: "shinji-ikari"
+    relationType: "Amigo"
+    description: "Su amistad, iniciada tras un conflicto inicial, termina marcada por la culpa cuando Shinji se ve obligado a destruir el EVA-03 con él dentro."
+  - character: "kensuke-aida"
+    relationType: "Amigo"
+    description: "Comparte con él una amistad escolar cercana, previa a su reclutamiento como piloto del EVA-03."
+  - character: "hikari-horaki"
+    relationType: "Interés mutuo"
+    description: "Mantiene con ella una relación cambiante que insinúa una atracción incipiente entre ambos."
 tags: ["companero-clase", "piloto-eva", "eva-03", "tokio-3"]
 sources:
   - title: "Evangelion Wiki (Fandom)"
