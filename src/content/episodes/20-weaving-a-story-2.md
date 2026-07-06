@@ -2,7 +2,7 @@
 episodeNumber: 20
 title: "Weaving a Story 2: Oral Stage"
 isMovie: false
-airDate: "1996-02-28"
+airDate: "1996-02-14"
 director: "Hideaki Anno"
 charactersFeatured: ["shinji-ikari", "gendo-ikari", "ritsuko-akagi", "misato-katsuragi"]
 image: "/images/episodes/20-weaving-a-story-2.jpg"

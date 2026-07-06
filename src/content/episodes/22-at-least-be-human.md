@@ -2,7 +2,7 @@
 episodeNumber: 22
 title: "At Least, Be Human"
 isMovie: false
-airDate: "1996-03-13"
+airDate: "1996-02-28"
 director: "Hideaki Anno"
 charactersFeatured: ["asuka-langley", "misato-katsuragi", "shinji-ikari"]
 image: "/images/episodes/22-at-least-be-human.jpg"

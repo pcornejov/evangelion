@@ -2,7 +2,7 @@
 episodeNumber: 13
 title: "Lilliputian Hitcher"
 isMovie: false
-airDate: "1996-01-10"
+airDate: "1995-12-27"
 director: "Hideaki Anno"
 charactersFeatured: ["rei-ayanami", "ritsuko-akagi", "misato-katsuragi", "shinji-ikari"]
 image: "/images/episodes/13-lilliputian-hitcher.jpg"

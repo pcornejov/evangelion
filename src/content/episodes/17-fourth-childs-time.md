@@ -2,7 +2,7 @@
 episodeNumber: 17
 title: "Fourth Child's Time"
 isMovie: false
-airDate: "1996-02-07"
+airDate: "1996-01-24"
 director: "Hideaki Anno"
 charactersFeatured: ["shinji-ikari", "misato-katsuragi", "gendo-ikari"]
 image: "/images/episodes/17-fourth-childs-time.jpg"

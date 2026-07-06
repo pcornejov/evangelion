@@ -2,7 +2,7 @@
 episodeNumber: 14
 title: "Weaving a Story, 2: Angel Attack"
 isMovie: false
-airDate: "1996-01-17"
+airDate: "1996-01-03"
 director: "Hideaki Anno"
 charactersFeatured: ["misato-katsuragi", "ritsuko-akagi", "gendo-ikari", "shinji-ikari"]
 image: "/images/episodes/14-weaving-a-story.jpg"

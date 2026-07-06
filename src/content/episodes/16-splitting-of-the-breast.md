@@ -2,7 +2,7 @@
 episodeNumber: 16
 title: "Splitting of the Breast"
 isMovie: false
-airDate: "1996-01-31"
+airDate: "1996-01-17"
 director: "Hideaki Anno"
 charactersFeatured: ["shinji-ikari", "misato-katsuragi", "ritsuko-akagi", "rei-ayanami"]
 image: "/images/episodes/16-splitting-of-the-breast.jpg"

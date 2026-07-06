@@ -2,7 +2,7 @@
 episodeNumber: 18
 title: "Ambivalence"
 isMovie: false
-airDate: "1996-02-14"
+airDate: "1996-01-31"
 director: "Hideaki Anno"
 charactersFeatured: ["shinji-ikari", "gendo-ikari", "misato-katsuragi", "ritsuko-akagi"]
 image: "/images/episodes/18-ambivalence.jpg"

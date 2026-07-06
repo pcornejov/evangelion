@@ -1,0 +1,116 @@
+---
+import { getCollection, render } from 'astro:content';
+import EntityLayout from '../../layouts/EntityLayout.astro';
+import Badge from '../../components/Badge.astro';
+
+export async function getStaticPaths() {
+  const angels = await getCollection('angels');
+  return angels.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+const stats = [
+  { label: 'Ángel N°', value: String(entry.data.angelNumber) },
+  { label: 'Clasificación', value: entry.data.classification },
+  ...(entry.data.atFieldType ? [{ label: 'AT Field', value: entry.data.atFieldType }] : []),
+  { label: 'Desenlace', value: entry.data.outcome },
+];
+---
+<EntityLayout
+  title={entry.data.name}
+  description={entry.data.summary}
+  crumbs={[{ label: 'Ángeles', href: '/angels/' }, { label: entry.data.name }]}
+>
+  <Fragment slot="stats">
+    <div class="stats-wrapper">
+      <Badge variant="danger">Ángel</Badge>
+      <dl class="statblock">
+        {stats.map((stat) => (
+          <div class="stat-row">
+            <dt>{stat.label}</dt>
+            <dd>{stat.value}</dd>
+          </div>
+        ))}
+      </dl>
+      {entry.data.abilities.length > 0 && (
+        <div class="tags">
+          {entry.data.abilities.map((ability) => <Badge variant="muted">{ability}</Badge>)}
+        </div>
+      )}
+    </div>
+  </Fragment>
+  <p class="summary">{entry.data.summary}</p>
+  <Content />
+  {entry.data.sources.length > 0 && (
+    <>
+      <h2>Fuentes</h2>
+      <ul class="sources">
+        {entry.data.sources.map((source) => (
+          <li>
+            <strong>{source.title}</strong> ({source.type}){source.note ? ` — ${source.note}` : ''}
+          </li>
+        ))}
+      </ul>
+    </>
+  )}
+</EntityLayout>
+
+<style>
+  .stats-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .statblock {
+    background: var(--color-bg-panel);
+    border: 1px solid var(--color-nerv-green);
+    border-radius: var(--radius-panel);
+    padding: var(--space-sm);
+    margin: 0;
+  }
+
+  .stat-row {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    padding: 0.35rem 0;
+    border-bottom: 1px dashed var(--color-border);
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+  }
+
+  .stat-row:last-child {
+    border-bottom: none;
+  }
+
+  dt {
+    color: var(--color-text-muted);
+  }
+
+  dd {
+    margin: 0;
+    text-align: right;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .summary {
+    font-size: 1.05rem;
+    color: var(--color-text-muted);
+  }
+
+  .sources {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+  }
+</style>

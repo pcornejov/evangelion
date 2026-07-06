@@ -2,7 +2,7 @@
 episodeNumber: 19
 title: "Introjection"
 isMovie: false
-airDate: "1996-02-21"
+airDate: "1996-02-07"
 director: "Hideaki Anno"
 charactersFeatured: ["shinji-ikari", "asuka-langley", "rei-ayanami", "misato-katsuragi", "gendo-ikari"]
 image: "/images/episodes/19-introjection.jpg"

@@ -2,7 +2,7 @@
 episodeNumber: 23
 title: "Tears"
 isMovie: false
-airDate: "1996-03-20"
+airDate: "1996-03-06"
 director: "Hideaki Anno"
 charactersFeatured: ["rei-ayanami", "gendo-ikari", "ritsuko-akagi", "shinji-ikari"]
 image: "/images/episodes/23-tears.jpg"

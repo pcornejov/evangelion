@@ -54,4 +54,39 @@ const episodes = defineCollection({
   }),
 });
 
-export const collections = { characters, episodes };
+const mechas = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/mechas' }),
+  schema: z.object({
+    unitName: z.string(),
+    unitDesignation: z.string(),
+    pilot: z.array(z.string()).default([]),
+    manufacturer: z.string(),
+    powerSource: z.string(),
+    soul: z.string().optional(),
+    abilities: z.array(z.string()).default([]),
+    status: z.enum(['Activa', 'Destruida', 'Inactiva']),
+    firstAppearance: z.string().optional(),
+    image: z.string().default('/images/mechas/placeholder.svg'),
+    summary: z.string(),
+    sources: z.array(sourceSchema).default([]),
+  }),
+});
+
+const angels = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/angels' }),
+  schema: z.object({
+    angelNumber: z.number(),
+    name: z.string(),
+    nameJapanese: z.string().optional(),
+    classification: z.string(),
+    abilities: z.array(z.string()).default([]),
+    atFieldType: z.string().optional(),
+    episodeAppearance: z.string().optional(),
+    outcome: z.string(),
+    image: z.string().default('/images/angels/placeholder.svg'),
+    summary: z.string(),
+    sources: z.array(sourceSchema).default([]),
+  }),
+});
+
+export const collections = { characters, episodes, mechas, angels };

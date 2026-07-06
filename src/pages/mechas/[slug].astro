@@ -1,0 +1,138 @@
+---
+import { getCollection, render } from 'astro:content';
+import EntityLayout from '../../layouts/EntityLayout.astro';
+import Badge from '../../components/Badge.astro';
+
+export async function getStaticPaths() {
+  const mechas = await getCollection('mechas');
+  return mechas.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const allCharacters = await getCollection('characters');
+
+const statusVariant: Record<string, 'success' | 'danger' | 'muted'> = {
+  Activa: 'success',
+  Destruida: 'danger',
+  Inactiva: 'muted',
+};
+
+const stats = [
+  { label: 'Designación', value: entry.data.unitDesignation },
+  { label: 'Fabricante', value: entry.data.manufacturer },
+  { label: 'Fuente de poder', value: entry.data.powerSource },
+  ...(entry.data.soul ? [{ label: 'Alma', value: entry.data.soul }] : []),
+  { label: 'Estado', value: entry.data.status },
+];
+
+const related = entry.data.pilot
+  .map((slug) => {
+    const target = allCharacters.find((c) => c.id === slug);
+    if (!target) return null;
+    return {
+      href: `/characters/${target.id}`,
+      title: target.data.name,
+      subtitle: 'Piloto',
+      image: target.data.image,
+    };
+  })
+  .filter((x): x is NonNullable<typeof x> => x !== null);
+---
+<EntityLayout
+  title={entry.data.unitName}
+  description={entry.data.summary}
+  crumbs={[{ label: 'Mechas', href: '/mechas/' }, { label: entry.data.unitName }]}
+  related={related}
+>
+  <Fragment slot="stats">
+    <div class="stats-wrapper">
+      <Badge variant={statusVariant[entry.data.status] ?? 'default'}>{entry.data.status}</Badge>
+      <dl class="statblock">
+        {stats.map((stat) => (
+          <div class="stat-row">
+            <dt>{stat.label}</dt>
+            <dd>{stat.value}</dd>
+          </div>
+        ))}
+      </dl>
+      {entry.data.abilities.length > 0 && (
+        <div class="tags">
+          {entry.data.abilities.map((ability) => <Badge variant="muted">{ability}</Badge>)}
+        </div>
+      )}
+    </div>
+  </Fragment>
+  <p class="summary">{entry.data.summary}</p>
+  <Content />
+  {entry.data.sources.length > 0 && (
+    <>
+      <h2>Fuentes</h2>
+      <ul class="sources">
+        {entry.data.sources.map((source) => (
+          <li>
+            <strong>{source.title}</strong> ({source.type}){source.note ? ` — ${source.note}` : ''}
+          </li>
+        ))}
+      </ul>
+    </>
+  )}
+</EntityLayout>
+
+<style>
+  .stats-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .statblock {
+    background: var(--color-bg-panel);
+    border: 1px solid var(--color-nerv-green);
+    border-radius: var(--radius-panel);
+    padding: var(--space-sm);
+    margin: 0;
+  }
+
+  .stat-row {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    padding: 0.35rem 0;
+    border-bottom: 1px dashed var(--color-border);
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+  }
+
+  .stat-row:last-child {
+    border-bottom: none;
+  }
+
+  dt {
+    color: var(--color-text-muted);
+  }
+
+  dd {
+    margin: 0;
+    text-align: right;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .summary {
+    font-size: 1.05rem;
+    color: var(--color-text-muted);
+  }
+
+  .sources {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+  }
+</style>

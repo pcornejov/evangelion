@@ -2,7 +2,7 @@
 episodeNumber: 15
 title: "Those Women Longed for the Touch of Others' Lips, and Thus They Were Hated"
 isMovie: false
-airDate: "1996-01-24"
+airDate: "1996-01-10"
 director: "Hideaki Anno"
 charactersFeatured: ["misato-katsuragi", "ryoji-kaji", "ritsuko-akagi", "gendo-ikari"]
 image: "/images/episodes/15-those-women-longed-for-the-touch-of-others-lips.jpg"

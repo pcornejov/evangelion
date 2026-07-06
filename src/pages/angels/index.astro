@@ -1,9 +1,23 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import EntityGrid from '../../components/EntityGrid.astro';
+import Card from '../../components/Card.astro';
+import { getCollection } from 'astro:content';
+
+const angels = await getCollection('angels');
+const sorted = angels.sort((a, b) => a.data.angelNumber - b.data.angelNumber);
 ---
 <BaseLayout title="Ángeles — NERV Encyclopedia">
   <main>
     <h1>Ángeles</h1>
-    <p>Sección en construcción. Próximamente.</p>
+    {sorted.length === 0 ? (
+      <p>Sección en construcción. Próximamente.</p>
+    ) : (
+      <EntityGrid>
+        {sorted.map((a) => (
+          <Card href={`/angels/${a.id}`} title={a.data.name} subtitle={`Ángel ${a.data.angelNumber}`} image={a.data.image} />
+        ))}
+      </EntityGrid>
+    )}
   </main>
 </BaseLayout>

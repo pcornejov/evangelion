@@ -2,7 +2,7 @@
 episodeNumber: 21
 title: "He was Aware that he was Still a Child"
 isMovie: false
-airDate: "1996-03-06"
+airDate: "1996-02-21"
 director: "Hideaki Anno"
 charactersFeatured: ["gendo-ikari", "rei-ayanami", "ritsuko-akagi"]
 image: "/images/episodes/21-he-was-aware-that-he-was-still-a-child.jpg"
