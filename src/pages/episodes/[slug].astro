@@ -1,0 +1,122 @@
+---
+import { getCollection, render } from 'astro:content';
+import EntityLayout from '../../layouts/EntityLayout.astro';
+import Badge from '../../components/Badge.astro';
+
+export async function getStaticPaths() {
+  const episodes = await getCollection('episodes');
+  return episodes.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const allCharacters = await getCollection('characters');
+
+const stats = [
+  ...(entry.data.episodeNumber !== null
+    ? [{ label: 'Episodio', value: String(entry.data.episodeNumber) }]
+    : []),
+  { label: 'Emisión', value: entry.data.airDate },
+  ...(entry.data.director ? [{ label: 'Director', value: entry.data.director }] : []),
+  ...(entry.data.writer ? [{ label: 'Guion', value: entry.data.writer }] : []),
+];
+
+const related = entry.data.charactersFeatured
+  .map((slug) => {
+    const target = allCharacters.find((c) => c.id === slug);
+    if (!target) return null;
+    return {
+      href: `/characters/${target.id}`,
+      title: target.data.name,
+      subtitle: target.data.role,
+      image: target.data.image,
+    };
+  })
+  .filter((x): x is NonNullable<typeof x> => x !== null);
+---
+<EntityLayout
+  title={entry.data.title}
+  description={entry.data.summary}
+  crumbs={[{ label: 'Episodios', href: '/episodes/' }, { label: entry.data.title }]}
+  related={related}
+>
+  <Fragment slot="stats">
+    <div class="stats-wrapper">
+      {entry.data.isMovie && <Badge variant="purple">Película</Badge>}
+      <dl class="statblock">
+        {stats.map((stat) => (
+          <div class="stat-row">
+            <dt>{stat.label}</dt>
+            <dd>{stat.value}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </Fragment>
+  <p class="summary">{entry.data.summary}</p>
+  <Content />
+  {entry.data.sources.length > 0 && (
+    <>
+      <h2>Fuentes</h2>
+      <ul class="sources">
+        {entry.data.sources.map((source) => (
+          <li>
+            <strong>{source.title}</strong> ({source.type}){source.note ? ` — ${source.note}` : ''}
+          </li>
+        ))}
+      </ul>
+    </>
+  )}
+</EntityLayout>
+
+<style>
+  .stats-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .statblock {
+    background: var(--color-bg-panel);
+    border: 1px solid var(--color-nerv-green);
+    border-radius: var(--radius-panel);
+    padding: var(--space-sm);
+    margin: 0;
+  }
+
+  .stat-row {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    padding: 0.35rem 0;
+    border-bottom: 1px dashed var(--color-border);
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+  }
+
+  .stat-row:last-child {
+    border-bottom: none;
+  }
+
+  dt {
+    color: var(--color-text-muted);
+  }
+
+  dd {
+    margin: 0;
+    text-align: right;
+  }
+
+  .summary {
+    font-size: 1.05rem;
+    color: var(--color-text-muted);
+  }
+
+  .sources {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+  }
+</style>

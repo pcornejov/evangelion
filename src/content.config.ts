@@ -36,4 +36,22 @@ const characters = defineCollection({
   }),
 });
 
-export const collections = { characters };
+const episodes = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/episodes' }),
+  schema: z.object({
+    episodeNumber: z.number().nullable(),
+    title: z.string(),
+    titleJapanese: z.string().optional(),
+    isMovie: z.boolean().default(false),
+    airDate: z.string(),
+    director: z.string().optional(),
+    writer: z.string().optional(),
+    charactersFeatured: z.array(z.string()).default([]),
+    angelFeatured: z.string().optional(),
+    image: z.string().default('/images/episodes/placeholder.svg'),
+    summary: z.string(),
+    sources: z.array(sourceSchema).default([]),
+  }),
+});
+
+export const collections = { characters, episodes };

@@ -1,9 +1,69 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { withBase } from '../../utils/url';
+import Badge from '../../components/Badge.astro';
+import { getCollection } from 'astro:content';
+
+const episodes = await getCollection('episodes');
+const sorted = episodes.sort((a, b) => {
+  const aNum = a.data.episodeNumber ?? Infinity;
+  const bNum = b.data.episodeNumber ?? Infinity;
+  return aNum - bNum;
+});
 ---
 <BaseLayout title="Episodios — NERV Encyclopedia">
   <main>
     <h1>Episodios</h1>
-    <p>Sección en construcción. Próximamente.</p>
+    {sorted.length === 0 ? (
+      <p>Sección en construcción. Próximamente.</p>
+    ) : (
+      <ol class="episode-list">
+        {sorted.map((ep) => (
+          <li>
+            <a href={withBase(`/episodes/${ep.id}`)}>
+              {ep.data.isMovie ? (
+                <Badge variant="purple">Película</Badge>
+              ) : (
+                <span class="ep-number">{String(ep.data.episodeNumber).padStart(2, '0')}</span>
+              )}
+              <span class="ep-title">{ep.data.title}</span>
+            </a>
+          </li>
+        ))}
+      </ol>
+    )}
   </main>
 </BaseLayout>
+
+<style>
+  .episode-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .episode-list a {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-xs) var(--space-sm);
+    background: var(--color-bg-panel);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-panel);
+    color: var(--color-text);
+  }
+
+  .episode-list a:hover {
+    border-color: var(--color-nerv-green);
+    text-decoration: none;
+  }
+
+  .ep-number {
+    font-family: var(--font-display);
+    color: var(--color-nerv-green);
+    min-width: 2ch;
+  }
+</style>
