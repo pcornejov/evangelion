@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#0a0a0f"/>
+  <rect x="0" y="0" width="1200" height="630" fill="none" stroke="#2a2a38" stroke-width="2"/>
+  <path d="M600 120 L920 315 L600 510 L280 315 Z" fill="none" stroke="#00e5a0" stroke-width="3" opacity="0.6"/>
+  <circle cx="600" cy="315" r="70" fill="#8b5cf6" opacity="0.9"/>
+  <text x="600" y="325" font-family="monospace" font-size="28" fill="#0a0a0f" text-anchor="middle" font-weight="bold">NGE</text>
+  <text x="600" y="450" font-family="monospace" font-size="54" fill="#e7e7ea" text-anchor="middle" font-weight="bold">NERV ENCYCLOPEDIA</text>
+  <text x="600" y="500" font-family="monospace" font-size="24" fill="#00e5a0" text-anchor="middle">Neon Genesis Evangelion</text>
+</svg>

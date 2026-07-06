@@ -7,7 +7,7 @@ import { getCollection } from 'astro:content';
 const characters = await getCollection('characters');
 ---
 <BaseLayout title="Personajes — NERV Encyclopedia">
-  <main>
+  <main id="main-content">
     <h1>Personajes</h1>
     {characters.length === 0 ? (
       <p>Sección en construcción. Próximamente.</p>

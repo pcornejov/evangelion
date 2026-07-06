@@ -8,7 +8,7 @@ const angels = await getCollection('angels');
 const sorted = angels.sort((a, b) => a.data.angelNumber - b.data.angelNumber);
 ---
 <BaseLayout title="Ángeles — NERV Encyclopedia">
-  <main>
+  <main id="main-content">
     <h1>Ángeles</h1>
     {sorted.length === 0 ? (
       <p>Sección en construcción. Próximamente.</p>

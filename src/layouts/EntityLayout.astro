@@ -23,7 +23,7 @@ interface Props {
 const { title, description, crumbs, related = [] } = Astro.props;
 ---
 <BaseLayout title={`${title} — NERV Encyclopedia`} description={description}>
-  <main>
+  <main id="main-content">
     <Breadcrumbs crumbs={crumbs} />
     <div class="entity-layout">
       <aside>

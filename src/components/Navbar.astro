@@ -65,4 +65,16 @@ const links = [
     color: var(--color-nerv-green);
     text-decoration: none;
   }
+
+  @media (max-width: 640px) {
+    .navbar {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    nav {
+      order: 3;
+      justify-content: center;
+    }
+  }
 </style>
