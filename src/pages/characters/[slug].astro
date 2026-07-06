@@ -1,0 +1,157 @@
+---
+import { getCollection, render } from 'astro:content';
+import EntityLayout from '../../layouts/EntityLayout.astro';
+import Badge from '../../components/Badge.astro';
+import { withBase } from '../../utils/url';
+
+export async function getStaticPaths() {
+  const characters = await getCollection('characters');
+  return characters.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const allCharacters = await getCollection('characters');
+
+const statusVariant: Record<string, 'success' | 'danger' | 'purple' | 'muted'> = {
+  Vivo: 'success',
+  Muerto: 'danger',
+  Instrumentalidad: 'purple',
+  Desconocido: 'muted',
+};
+
+const stats = [
+  { label: 'Rol', value: entry.data.role },
+  ...(entry.data.age !== undefined ? [{ label: 'Edad', value: String(entry.data.age) }] : []),
+  { label: 'Seiyuu (JP)', value: entry.data.voiceActorJP },
+  ...(entry.data.voiceActorEN ? [{ label: 'Actor (EN)', value: entry.data.voiceActorEN }] : []),
+  ...(entry.data.evaUnit ? [{ label: 'Unidad EVA', value: entry.data.evaUnit }] : []),
+  { label: 'Estado', value: entry.data.status },
+];
+
+const related = entry.data.relations
+  .map((rel) => {
+    const target = allCharacters.find((c) => c.id === rel.character);
+    if (!target) return null;
+    return {
+      href: `/characters/${target.id}`,
+      title: target.data.name,
+      subtitle: rel.relationType,
+    };
+  })
+  .filter((x): x is NonNullable<typeof x> => x !== null);
+---
+<EntityLayout
+  title={entry.data.name}
+  description={entry.data.summary}
+  crumbs={[{ label: 'Personajes', href: '/characters/' }, { label: entry.data.name }]}
+  related={related}
+>
+  <Fragment slot="stats">
+    <div class="stats-wrapper">
+      <img class="portrait" src={withBase(entry.data.image)} alt={entry.data.name} loading="lazy" />
+      <div class="status-row">
+        <Badge variant={statusVariant[entry.data.status] ?? 'default'}>{entry.data.status}</Badge>
+      </div>
+      <dl class="statblock">
+        {stats.map((stat) => (
+          <div class="stat-row">
+            <dt>{stat.label}</dt>
+            <dd>{stat.value}</dd>
+          </div>
+        ))}
+      </dl>
+      {entry.data.tags.length > 0 && (
+        <div class="tags">
+          {entry.data.tags.map((tag) => <Badge variant="muted">{tag}</Badge>)}
+        </div>
+      )}
+    </div>
+  </Fragment>
+  <p class="summary">{entry.data.summary}</p>
+  <Content />
+  {entry.data.sources.length > 0 && (
+    <>
+      <h2>Fuentes</h2>
+      <ul class="sources">
+        {entry.data.sources.map((source) => (
+          <li>
+            <strong>{source.title}</strong> ({source.type}){source.note ? ` — ${source.note}` : ''}
+          </li>
+        ))}
+      </ul>
+    </>
+  )}
+</EntityLayout>
+
+<style>
+  .stats-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .portrait {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    border-radius: var(--radius-panel);
+    border: 1px solid var(--color-border);
+    background: var(--color-bg-panel-alt);
+  }
+
+  .status-row {
+    display: flex;
+    justify-content: center;
+  }
+
+  .statblock {
+    background: var(--color-bg-panel);
+    border: 1px solid var(--color-nerv-green);
+    border-radius: var(--radius-panel);
+    padding: var(--space-sm);
+    margin: 0;
+  }
+
+  .stat-row {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    padding: 0.35rem 0;
+    border-bottom: 1px dashed var(--color-border);
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+  }
+
+  .stat-row:last-child {
+    border-bottom: none;
+  }
+
+  dt {
+    color: var(--color-text-muted);
+  }
+
+  dd {
+    margin: 0;
+    text-align: right;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .summary {
+    font-size: 1.05rem;
+    color: var(--color-text-muted);
+  }
+
+  .sources {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+  }
+</style>

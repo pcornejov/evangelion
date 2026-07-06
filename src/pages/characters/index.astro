@@ -14,7 +14,7 @@ const characters = await getCollection('characters');
     ) : (
       <EntityGrid>
         {characters.map((c) => (
-          <Card href={`/characters/${c.id}`} title={c.data.name} subtitle={c.data.summary} />
+          <Card href={`/characters/${c.id}`} title={c.data.name} subtitle={c.data.role} image={c.data.image} />
         ))}
       </EntityGrid>
     )}
