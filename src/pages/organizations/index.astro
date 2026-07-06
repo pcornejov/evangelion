@@ -1,9 +1,22 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import EntityGrid from '../../components/EntityGrid.astro';
+import Card from '../../components/Card.astro';
+import { getCollection } from 'astro:content';
+
+const organizations = await getCollection('organizations');
 ---
 <BaseLayout title="Organizaciones — NERV Encyclopedia">
   <main>
-    <h1>Organizaciones</h1>
-    <p>Sección en construcción. Próximamente.</p>
+    <h1>Organizaciones y conceptos</h1>
+    {organizations.length === 0 ? (
+      <p>Sección en construcción. Próximamente.</p>
+    ) : (
+      <EntityGrid>
+        {organizations.map((o) => (
+          <Card href={`/organizations/${o.id}`} title={o.data.name} subtitle={o.data.type} image={o.data.image} />
+        ))}
+      </EntityGrid>
+    )}
   </main>
 </BaseLayout>

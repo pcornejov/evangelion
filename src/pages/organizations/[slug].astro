@@ -1,0 +1,89 @@
+---
+import { getCollection, render } from 'astro:content';
+import EntityLayout from '../../layouts/EntityLayout.astro';
+import Badge from '../../components/Badge.astro';
+
+export async function getStaticPaths() {
+  const organizations = await getCollection('organizations');
+  return organizations.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const allCharacters = await getCollection('characters');
+const allOrganizations = await getCollection('organizations');
+
+const related = [
+  ...entry.data.keyMembers
+    .map((slug) => {
+      const target = allCharacters.find((c) => c.id === slug);
+      if (!target) return null;
+      return {
+        href: `/characters/${target.id}`,
+        title: target.data.name,
+        subtitle: target.data.role,
+        image: target.data.image,
+      };
+    })
+    .filter((x): x is NonNullable<typeof x> => x !== null),
+  ...entry.data.relatedConcepts
+    .map((slug) => {
+      const target = allOrganizations.find((o) => o.id === slug);
+      if (!target) return null;
+      return {
+        href: `/organizations/${target.id}`,
+        title: target.data.name,
+        subtitle: target.data.type,
+        image: target.data.image,
+      };
+    })
+    .filter((x): x is NonNullable<typeof x> => x !== null),
+];
+---
+<EntityLayout
+  title={entry.data.name}
+  description={entry.data.summary}
+  crumbs={[{ label: 'Organizaciones', href: '/organizations/' }, { label: entry.data.name }]}
+  related={related}
+>
+  <Fragment slot="stats">
+    <div class="stats-wrapper">
+      <Badge variant="purple">{entry.data.type}</Badge>
+    </div>
+  </Fragment>
+  <p class="summary">{entry.data.summary}</p>
+  <Content />
+  {entry.data.sources.length > 0 && (
+    <>
+      <h2>Fuentes</h2>
+      <ul class="sources">
+        {entry.data.sources.map((source) => (
+          <li>
+            <strong>{source.title}</strong> ({source.type}){source.note ? ` — ${source.note}` : ''}
+          </li>
+        ))}
+      </ul>
+    </>
+  )}
+</EntityLayout>
+
+<style>
+  .stats-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .summary {
+    font-size: 1.05rem;
+    color: var(--color-text-muted);
+  }
+
+  .sources {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+  }
+</style>

@@ -89,4 +89,17 @@ const angels = defineCollection({
   }),
 });
 
-export const collections = { characters, episodes, mechas, angels };
+const organizations = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/organizations' }),
+  schema: z.object({
+    name: z.string(),
+    type: z.enum(['Organización', 'Concepto', 'Evento']),
+    keyMembers: z.array(z.string()).default([]),
+    relatedConcepts: z.array(z.string()).default([]),
+    summary: z.string(),
+    image: z.string().default('/images/organizations/placeholder.svg'),
+    sources: z.array(sourceSchema).default([]),
+  }),
+});
+
+export const collections = { characters, episodes, mechas, angels, organizations };
